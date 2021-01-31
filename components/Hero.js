@@ -34,7 +34,7 @@ export default function Hero(props) {
   function handleSubmit(event) {
     event.preventDefault()
     if (twitterHandle.trim().length === 0) {
-      alert('Please provide a valid twitter handle :)')
+      alert('Please provide a valid GitHub handle :)')
       return
     }
     if (story.trim().length === 0) {
@@ -52,7 +52,7 @@ export default function Hero(props) {
       })
       .catch((error) => {
         console.log(`boo :( ${error}`)
-        alert('🤷‍♀️')
+        alert('🤷‍♀️ Not Work Today')
         setSubmitting(false)
       })
   }
@@ -86,7 +86,7 @@ export default function Hero(props) {
             <input
               className={heroFormTwitterInput.className}
               type="text"
-              placeholder="twitter handle (no '@')"
+              placeholder="GitHub Username exp:abserari"
               onChange={handleTwitterChange}
               value={twitterHandle}
             />

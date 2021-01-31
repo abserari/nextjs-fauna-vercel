@@ -1,10 +1,14 @@
 import Head from 'next/head'
 import Footer from '../components/Footer'
 import Hero from '../components/Hero'
+import Link from 'next/link'
 
 const Guestbook = (props) => {
   return (
     <>
+    <Link href="/timeline">
+      <a>TimeLine</a>
+    </Link>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />

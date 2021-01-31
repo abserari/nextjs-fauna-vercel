@@ -11,8 +11,21 @@ import {
   guestbookEntryShareTwitterButtonLogo1,
   guestbookEntryShareTwitterButtonLogo2,
 } from '../styles/guestbookentry'
+import { useState, useEffect } from 'react'
+
+import GitHub from 'github-api';
+
+const gh = new GitHub();
 
 export default function GuestbookEntry(props) {
+  const [avatar, setavatar] = useState('')
+  const user = gh.getUser(props.twitter_handle);
+
+  user.getProfile()
+    .then(function ({ data: reposJson }) {
+      setavatar(reposJson.avatar_url)
+    });
+
   return (
     <>
       <div className={guestbookEntry.className}>
@@ -21,11 +34,11 @@ export default function GuestbookEntry(props) {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href={`https://twitter.com/${props.twitter_handle}/`}
+              href={`https://github.com/${props.twitter_handle}/`}
             >
               <img
                 className={guestbookEntryUserDetailAvatarImg.className}
-                src={`https://twitter-avatar.now.sh/${props.twitter_handle}/`}
+                src={`${avatar}`}
               />
             </a>
           </div>
@@ -33,7 +46,7 @@ export default function GuestbookEntry(props) {
             className={guestbookEntryUserDetailBiolink.className}
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://twitter.com/${props.twitter_handle}/`}
+            href={`https://github.com/${props.twitter_handle}/`}
           >
             {props.twitter_handle}
           </a>
@@ -46,7 +59,7 @@ export default function GuestbookEntry(props) {
       <div className={guestbookEntryShare.className}>
         <a
           href={`http://twitter.com/share?text=${encodeURIComponent(
-            props.story + ' @faunadb @zeithq'
+            props.story + '@abaserari @faunadb @zeithq'
           )}&url=${encodeURIComponent(
             'https://fauna.com'
           )}&hashtags=graphql,nextjs
